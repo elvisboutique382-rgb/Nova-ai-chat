@@ -1,12 +1,13 @@
 workflows:
   android-apk:
-    name: Android APK
+    name: Nova Chat AI APK
     instance_type: linux_x2
     max_build_duration: 30
     environment:
       flutter: stable
     scripts:
       - flutter create . --platforms=android
+      - sed -i 's/android:label="[^"]*"/android:label="Nova Chat AI"/' android/app/src/main/AndroidManifest.xml
       - flutter pub get
       - flutter build apk --debug
     artifacts:
