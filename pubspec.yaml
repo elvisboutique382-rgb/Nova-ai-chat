@@ -9,5 +9,7 @@ dependencies:
   http: ^1.2.0
   path_provider: ^2.1.0
   video_player: ^2.8.0
+  shared_preferences: ^2.2.0
+  flutter_tts: ^4.2.0
 flutter:
   uses-material-design: true
