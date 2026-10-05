@@ -5,9 +5,9 @@ import 'package:http/http.dart' as http;
 import 'package:path_provider/path_provider.dart';
 import 'package:video_player/video_player.dart';
 
-const claudeKey = 'PASTE_CLAUDE_KEY_HERE';
-const openaiKey = 'PASTE_OPENAI_KEY_HERE';
-const geminiKey = 'PASTE_GEMINI_KEY_HERE';
+const claudeKey = String.fromEnvironment('CLAUDE_KEY');
+const openaiKey = String.fromEnvironment('OPENAI_KEY');
+const geminiKey = String.fromEnvironment('GEMINI_KEY');
 
 const videoModel = 'veo-3.1-generate-preview';
 const gBase = 'https://generativelanguage.googleapis.com/v1beta';
@@ -166,7 +166,8 @@ class _ChatState extends State<Chat> {
     });
 
     if (ai == 'Video') {
-      setState(() => msgs.add('Nova: Creating your video. This takes a few minutes...'));
+      setState(() => msgs.add(
+          'Nova: Creating your video. This takes a few minutes...'));
       final res = await makeVideo(q);
       setState(() {
         msgs.add(res);
@@ -204,7 +205,14 @@ class _ChatState extends State<Chat> {
       appBar: AppBar(title: const Text('Nova Chat AI'), actions: [
         DropdownButton<String>(
           value: ai,
-          items: ['Combined', 'All three', 'Claude', 'ChatGPT', 'Gemini', 'Video']
+          items: [
+            'Combined',
+            'All three',
+            'Claude',
+            'ChatGPT',
+            'Gemini',
+            'Video'
+          ]
               .map((e) => DropdownMenuItem(value: e, child: Text(e)))
               .toList(),
           onChanged: (v) => setState(() => ai = v!),
