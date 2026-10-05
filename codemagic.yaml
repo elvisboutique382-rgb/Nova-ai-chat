@@ -1,7 +1,7 @@
 workflows:
   android-apk:
     name: Nova Chat AI APK
-    instance_type: linux_x2
+    instance_type: mac_mini_m2
     max_build_duration: 30
     environment:
       flutter: stable
@@ -9,7 +9,7 @@ workflows:
         - ai_keys
     scripts:
       - flutter create . --platforms=android
-      - sed -i 's/android:label="[^"]*"/android:label="Nova Chat AI"/' android/app/src/main/AndroidManifest.xml
+      - sed -i '' 's/android:label="[^"]*"/android:label="Nova Chat AI"/' android/app/src/main/AndroidManifest.xml
       - flutter pub get
       - flutter build apk --debug --dart-define=CLAUDE_KEY=$CLAUDE_KEY --dart-define=OPENAI_KEY=$OPENAI_KEY --dart-define=GEMINI_KEY=$GEMINI_KEY
     artifacts:
